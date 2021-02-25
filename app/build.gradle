@@ -45,4 +45,10 @@ dependencies {
 
     //LottieAnimation
     implementation "com.airbnb.android:lottie:3.6.1"
+
+    //ImageSlider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
+    //Material Component Library
+    implementation 'com.google.android.material:material:1.3.0'
 }
