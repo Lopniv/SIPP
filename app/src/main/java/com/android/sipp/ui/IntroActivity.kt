@@ -3,16 +3,17 @@ package com.android.sipp.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.android.sipp.R
 import com.android.sipp.adapter.SliderAdapter
 import com.android.sipp.databinding.ActivityIntroBinding
 import com.android.sipp.model.SlideModel
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
-import kotlin.math.log
 
 class IntroActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -33,7 +34,7 @@ class IntroActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(b.root)
         instanceAdapter()
         addSliderItem()
-        setClickButton()
+        setClickListener()
     }
 
     private fun instanceAdapter() {
@@ -59,7 +60,7 @@ class IntroActivity : AppCompatActivity(), View.OnClickListener {
         b.imageSlider.isAutoCycle = true
     }
 
-    private fun setClickButton() {
+    private fun setClickListener() {
         b.btnLogin.setOnClickListener(this)
         b.btnRegister.setOnClickListener(this)
     }
@@ -69,9 +70,15 @@ class IntroActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(login)
     }
 
+    private fun category() {
+        val category = Intent(this, CategoryActivity::class.java)
+        startActivity(category)
+    }
+
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_login -> login()
+            R.id.btn_register -> category()
         }
     }
 }

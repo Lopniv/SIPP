@@ -5,4 +5,13 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login_description">Masukkan email dan password yang terdaftar pada aplikasi</string>
+    <string name="register_description">Masukkan data dirimu dan data lainnya</string>
+    <string name="first_name">Nama depan</string>
+    <string name="last_name">Nama belakang</string>
+    <string name="phone">Nomor telephone</string>
+    <string name="next">Selanjutnya</string>
+    <string name="trash_description">Deskripsi sampah</string>
+    <string name="sum_of_trash">Jumlah sampah/hari (kg)</string>
+    <string name="pickup_total">Penjemputan yang dilakukan (... kali)</string>
+    <string name="register_as">Daftarkan dirimu sebagai</string>
 </resources>
