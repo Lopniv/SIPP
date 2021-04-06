@@ -2,4 +2,7 @@
     <string name="app_name">SIPP</string>
     <string name="login">Masuk</string>
     <string name="register">Daftar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_description">Masukkan email dan password yang terdaftar pada aplikasi</string>
 </resources>
