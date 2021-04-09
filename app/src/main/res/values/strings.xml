@@ -14,4 +14,6 @@
     <string name="sum_of_trash">Jumlah sampah/hari (kg)</string>
     <string name="pickup_total">Penjemputan yang dilakukan (... kali)</string>
     <string name="register_as">Daftarkan dirimu sebagai</string>
+    <string name="register_succes">Akun kamu berhasil terdaftar, mohon tunggu dan cek email kamu untuk verifikasi</string>
+    <string name="please_wait">Mohon Tunggu</string>
 </resources>

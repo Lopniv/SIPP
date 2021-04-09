@@ -4,6 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityRegisterDetailBinding
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_LAST_NAME
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PHONE
+import com.android.sipp.utils.Utils.Keys.PASSWORD
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
 
 class RegisterDetailActivity : AppCompatActivity() {
 
@@ -15,26 +24,31 @@ class RegisterDetailActivity : AppCompatActivity() {
     private var phone: String? = null
     private var password: String? = null
 
-    companion object {
-        const val FIRST_NAME = "first_name"
-        const val LAST_NAME = "last_name"
-        const val EMAIL = "email"
-        const val PHONE = "phone"
-        const val PASSWORD = "password"
-    }
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var user: FirebaseUser
+    private lateinit var storageReference: StorageReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityRegisterDetailBinding.inflate(layoutInflater)
         setContentView(b.root)
+        initiateFirebase()
         getExtra()
     }
 
+    private fun initiateFirebase() {
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+//        val storage = FirebaseStorage.getInstance()
+//        storageReference = storage.reference.child(REFERENCE_IMAGE_PROFILE_ADMINS)
+    }
+
     private fun getExtra() {
-        firstName = intent.getStringExtra(FIRST_NAME)
-        lastName = intent.getStringExtra(LAST_NAME)
-        email = intent.getStringExtra(EMAIL)
-        phone = intent.getStringExtra(PHONE)
+        firstName = intent.getStringExtra(FIELD_FIRST_NAME)
+        lastName = intent.getStringExtra(FIELD_LAST_NAME)
+        email = intent.getStringExtra(FIELD_EMAIL)
+        phone = intent.getStringExtra(FIELD_PHONE)
         password = intent.getStringExtra(PASSWORD)
     }
 }

@@ -12,6 +12,7 @@ import com.android.sipp.R
 import com.android.sipp.adapter.SliderAdapter
 import com.android.sipp.databinding.ActivityIntroBinding
 import com.android.sipp.model.SlideModel
+import com.android.sipp.utils.Utils
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 
