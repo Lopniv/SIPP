@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.sipp.R
@@ -16,31 +17,30 @@ import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_LAST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PHONE
 import com.android.sipp.utils.Utils.Keys.CATEGORY
-import com.android.sipp.utils.Utils.Keys.DEFAULT
 import com.android.sipp.utils.Utils.Keys.PASSWORD
 import com.android.sipp.utils.Utils.Keys.VALUE_INDUSTRY
 import com.android.sipp.utils.Utils.Keys.VALUE_PERSONAL
-import com.android.sipp.utils.Utils.hideLoading
-import com.android.sipp.utils.Utils.showLoading
+import com.android.sipp.utils.Utils.showDialog
 import com.android.sipp.utils.Utils.showMessage
 import com.android.sipp.utils.Utils.showToast
+import com.android.sipp.utils.Utils.start
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlin.random.Random
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var b : ActivityRegisterBinding
-
-    private var category : Int? = null
+    private var category : String? = null
+    private var id: Int? = null
     private var firstName: String? = null
     private var lastName: String? = null
     private var email: String? = null
     private var phone: String? = null
     private var password: String? = null
 
+    private lateinit var b : ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var user: FirebaseUser
@@ -50,14 +50,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         b = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(b.root)
-        initiateFirebase()
+        initiate()
         setClickListener()
         getExtra()
         setView()
         checkData()
     }
 
-    private fun initiateFirebase() {
+    private fun initiate() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         //val storage = FirebaseStorage.getInstance()
@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getExtra() {
-        category = intent.getIntExtra(CATEGORY, DEFAULT)
+        category = intent.getStringExtra(CATEGORY)
     }
 
     private fun setView() {
@@ -106,6 +106,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun isValidated() : Boolean {
+        return if (password?.length!! >= 8){
+            true
+        } else {
+            showMessage(b.root, "Password kamu kurang dari 8 karakter")
+            false
+        }
+    }
+
     private fun register() {
         if (category == VALUE_PERSONAL){
             checkEmailInUser()
@@ -121,7 +130,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun checkEmailInUser() {
-        showLoading(this, b.progressbar)
+        showDialog(this, true)
         firestore.collection(COLLECTION_USER)
             .whereEqualTo(FIELD_EMAIL, email)
             .get()
@@ -130,18 +139,17 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     if (task.result?.isEmpty == true){
                         checkEmailInIndustry()
                     } else {
-                        hideLoading(this, b.progressbar)
+                        showDialog(this, false)
                         showMessage(b.root, "Maaf, email sudah digunakan")
                     }
                 } else {
-                    hideLoading(this, b.progressbar)
+                    showDialog(this, false)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
     }
 
     private fun checkEmailInIndustry() {
-        showLoading(this, b.progressbar)
         firestore.collection(COLLECTION_INDUSTRY)
             .whereEqualTo(FIELD_EMAIL, email)
             .get()
@@ -150,11 +158,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     if (task.result?.isEmpty == true){
                         requestCreateAccount()
                     } else {
-                        hideLoading(this, b.progressbar)
+                        showDialog(this, false)
                         showMessage(b.root, "Maaf, email sudah digunakan")
                     }
                 } else {
-                    hideLoading(this, b.progressbar)
+                    showDialog(this, false)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
@@ -166,14 +174,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 user = auth.currentUser
                 requestCreateUserData()
             } else {
-                hideLoading(this, b.progressbar)
+                showDialog(this, false)
                 task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
         }
     }
 
     private fun requestCreateUserData() {
-        val user = Users(firstName!!, lastName!!, email!!, phone!!)
+        id = Random.nextInt(100000, 200000)
+        Log.e("TAG", "$id")
+        val user = Users(id!!, firstName!!, lastName!!, email!!, phone!!, category!!)
         firestore.collection(COLLECTION_USER)
             .document(email!!)
             .set(user)
@@ -181,7 +191,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 if (task.isSuccessful){
                     requestVerifyEmail()
                 } else {
-                    hideLoading(this, b.progressbar)
+                    showDialog(this, false)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
@@ -190,11 +200,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun requestVerifyEmail() {
         user.sendEmailVerification().addOnCompleteListener { task ->
             if (task.isSuccessful){
-                hideLoading(this, b.progressbar)
+                showDialog(this, false)
                 showToast(this, getString(R.string.register_succes))
-                IntroActivity.Utils.start(this)
+                start(this, IntroActivity::class.java)
             } else {
-                hideLoading(this, b.progressbar)
+                showDialog(this, false)
                 task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
         }
@@ -203,7 +213,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_back -> finish()
-            R.id.btn_register -> register()
+            R.id.btn_register -> if(isValidated()) register()
         }
     }
 }

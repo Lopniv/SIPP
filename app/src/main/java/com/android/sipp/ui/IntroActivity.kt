@@ -21,14 +21,6 @@ class IntroActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var b : ActivityIntroBinding
     private lateinit var adapter: SliderAdapter
 
-    object Utils {
-        fun start(context: Context) {
-            val intent = Intent(context, IntroActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            context.startActivity(intent)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityIntroBinding.inflate(layoutInflater)

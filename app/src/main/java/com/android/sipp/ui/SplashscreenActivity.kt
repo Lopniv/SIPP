@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.android.sipp.R
+import com.android.sipp.utils.Utils.start
 
 class SplashscreenActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class SplashscreenActivity : AppCompatActivity() {
 
     private fun goToApp() {
         Handler(Looper.getMainLooper()).postDelayed({
-            IntroActivity.Utils.start(this)
+            start(this, IntroActivity::class.java)
         }, TIME_LENGTH.toLong())
     }
 }

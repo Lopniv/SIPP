@@ -1,12 +1,17 @@
 package com.android.sipp.utils
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import com.android.sipp.R
+import com.android.sipp.ui.IntroActivity
 import com.google.android.material.snackbar.Snackbar
 
 object Utils {
@@ -24,8 +29,20 @@ object Utils {
         const val PASSWORD = "password"
         const val CATEGORY = "CATEGORY"
         const val DEFAULT = 0
-        const val VALUE_PERSONAL = 1
-        const val VALUE_INDUSTRY = 2
+        const val VALUE_PERSONAL = "personal"
+        const val VALUE_INDUSTRY = "industry"
+    }
+
+    fun showDialog(activity: Activity, isShow: Boolean) {
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.layout_loading)
+        if (isShow){
+            dialog.show()
+        } else {
+            dialog.dismiss()
+        }
     }
 
     fun showLoading(activity: Activity, progressBar: View) {
@@ -46,5 +63,11 @@ object Utils {
 
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun start(context: Context, activity: Class<*>) {
+        val intent = Intent(context, activity)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        context.startActivity(intent)
     }
 }
