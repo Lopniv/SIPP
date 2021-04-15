@@ -14,13 +14,17 @@ import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_LAST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PHONE
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_TYPE
 import com.android.sipp.utils.Utils.Keys.CATEGORY
 import com.android.sipp.utils.Utils.Keys.PASSWORD
 import com.android.sipp.utils.Utils.Keys.VALUE_INDUSTRY
 import com.android.sipp.utils.Utils.Keys.VALUE_PERSONAL
+import com.android.sipp.utils.Utils.hideLoading
 import com.android.sipp.utils.Utils.showDialog
+import com.android.sipp.utils.Utils.showLoading
 import com.android.sipp.utils.Utils.showMessage
 import com.android.sipp.utils.Utils.showToast
 import com.android.sipp.utils.Utils.start
@@ -33,7 +37,7 @@ import kotlin.random.Random
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private var category : String? = null
-    private var id: Int? = null
+    private var id: String? = null
     private var firstName: String? = null
     private var lastName: String? = null
     private var email: String? = null
@@ -116,21 +120,25 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun register() {
+        id = Random.nextInt(100000, 200000).toString()
+        Log.e("TAG", "$id")
         if (category == VALUE_PERSONAL){
             checkEmailInUser()
         } else if (category == VALUE_INDUSTRY) {
             val detailRegister = Intent(this, RegisterDetailActivity::class.java)
+            detailRegister.putExtra(FIELD_ID, id)
             detailRegister.putExtra(FIELD_FIRST_NAME, firstName)
             detailRegister.putExtra(FIELD_LAST_NAME, lastName)
             detailRegister.putExtra(FIELD_EMAIL, email)
             detailRegister.putExtra(FIELD_PHONE, phone)
+            detailRegister.putExtra(FIELD_TYPE, category)
             detailRegister.putExtra(PASSWORD, password)
             startActivity(detailRegister)
         }
     }
 
     private fun checkEmailInUser() {
-        showDialog(this, true)
+        showLoading(this, b.progressbar)
         firestore.collection(COLLECTION_USER)
             .whereEqualTo(FIELD_EMAIL, email)
             .get()
@@ -139,11 +147,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     if (task.result?.isEmpty == true){
                         checkEmailInIndustry()
                     } else {
-                        showDialog(this, false)
+                        hideLoading(this, b.progressbar)
                         showMessage(b.root, "Maaf, email sudah digunakan")
                     }
                 } else {
-                    showDialog(this, false)
+                    hideLoading(this, b.progressbar)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
@@ -158,11 +166,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     if (task.result?.isEmpty == true){
                         requestCreateAccount()
                     } else {
-                        showDialog(this, false)
+                        hideLoading(this, b.progressbar)
                         showMessage(b.root, "Maaf, email sudah digunakan")
                     }
                 } else {
-                    showDialog(this, false)
+                    hideLoading(this, b.progressbar)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
@@ -174,15 +182,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 user = auth.currentUser
                 requestCreateUserData()
             } else {
-                showDialog(this, false)
+                hideLoading(this, b.progressbar)
                 task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
         }
     }
 
     private fun requestCreateUserData() {
-        id = Random.nextInt(100000, 200000)
-        Log.e("TAG", "$id")
         val user = Users(id!!, firstName!!, lastName!!, email!!, phone!!, category!!)
         firestore.collection(COLLECTION_USER)
             .document(email!!)
@@ -191,7 +197,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 if (task.isSuccessful){
                     requestVerifyEmail()
                 } else {
-                    showDialog(this, false)
+                    hideLoading(this, b.progressbar)
                     task.exception?.message?.let { message -> showMessage(b.root, message) }
                 }
             }
@@ -200,11 +206,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun requestVerifyEmail() {
         user.sendEmailVerification().addOnCompleteListener { task ->
             if (task.isSuccessful){
-                showDialog(this, false)
+                hideLoading(this, b.progressbar)
                 showToast(this, getString(R.string.register_succes))
                 start(this, IntroActivity::class.java)
             } else {
-                showDialog(this, false)
+                hideLoading(this, b.progressbar)
                 task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
         }
