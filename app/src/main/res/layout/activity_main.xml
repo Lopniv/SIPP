@@ -47,8 +47,24 @@
             android:id="@+id/bnv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bnv"
             android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_pickup"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_shipping"
+        android:background="@drawable/bg_center_bnv"
+        android:contentDescription="@string/bottom_sheet_behavior"
+        android:layout_marginBottom="10dp"
+        app:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
