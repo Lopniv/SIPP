@@ -11,7 +11,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import com.android.sipp.R
-import com.android.sipp.ui.IntroActivity
 import com.google.android.material.snackbar.Snackbar
 
 object Utils {

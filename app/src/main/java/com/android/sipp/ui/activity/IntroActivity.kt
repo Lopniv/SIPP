@@ -1,18 +1,14 @@
-package com.android.sipp.ui
+package com.android.sipp.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.android.sipp.R
 import com.android.sipp.adapter.SliderAdapter
 import com.android.sipp.databinding.ActivityIntroBinding
 import com.android.sipp.model.SlideModel
-import com.android.sipp.utils.Utils
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 

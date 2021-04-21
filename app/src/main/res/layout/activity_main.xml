@@ -6,42 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_1000"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv"
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@id/img_bg"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="-25dp"
-            android:layout_marginRight="30dp"
-            app:cardCornerRadius="20dp" />
-
-        <ImageView
-            android:id="@+id/img_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/img_waste_sorting" />
-
-        <LinearLayout
-            android:id="@+id/placeholder_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/bnv"
-            android:layout_below="@id/img_bg"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/bg_round"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:layout_above="@+id/bnv"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv"

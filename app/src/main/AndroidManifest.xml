@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIPP">
-        <activity android:name=".ui.CategoryActivity"></activity>
-        <activity android:name=".ui.RegisterDetailActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.IntroActivity" />
-        <activity android:name=".ui.SplashscreenActivity">
+        <activity android:name=".ui.activity.CategoryActivity"></activity>
+        <activity android:name=".ui.activity.RegisterDetailActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.IntroActivity" />
+        <activity android:name=".ui.activity.SplashscreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
     </application>
 
 </manifest>

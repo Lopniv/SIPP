@@ -1,4 +1,4 @@
-package com.android.sipp.ui
+package com.android.sipp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -23,7 +23,6 @@ import com.android.sipp.utils.Utils.Keys.PASSWORD
 import com.android.sipp.utils.Utils.Keys.VALUE_INDUSTRY
 import com.android.sipp.utils.Utils.Keys.VALUE_PERSONAL
 import com.android.sipp.utils.Utils.hideLoading
-import com.android.sipp.utils.Utils.showDialog
 import com.android.sipp.utils.Utils.showLoading
 import com.android.sipp.utils.Utils.showMessage
 import com.android.sipp.utils.Utils.showToast
