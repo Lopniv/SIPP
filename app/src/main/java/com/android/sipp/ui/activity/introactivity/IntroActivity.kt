@@ -1,14 +1,16 @@
-package com.android.sipp.ui.activity
+package com.android.sipp.ui.activity.introactivity
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.adapter.SliderAdapter
 import com.android.sipp.databinding.ActivityIntroBinding
-import com.android.sipp.model.SlideModel
+import com.android.sipp.ui.activity.CategoryActivity
+import com.android.sipp.ui.activity.loginactivity.LoginActivity
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 
@@ -16,27 +18,28 @@ class IntroActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var b : ActivityIntroBinding
     private lateinit var adapter: SliderAdapter
+    private lateinit var introViewModel: IntroViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(b.root)
-        instanceAdapter()
+        initiate()
         addSliderItem()
         setClickListener()
     }
 
-    private fun instanceAdapter() {
+    private fun initiate() {
+        introViewModel = ViewModelProvider(this).get(IntroViewModel::class.java)
         adapter = SliderAdapter(arrayListOf())
     }
 
     private fun addSliderItem() {
-        val items = ArrayList<SlideModel>()
-        items.add(SlideModel(R.drawable.intro_1, "Geanka", "Aplikasi yang membantu untuk mengatasi masalah sampahmu"))
-        items.add(SlideModel(R.drawable.intro_2, "Geanka", "Mari peduli pada lingkungan demi kebersihan dan kenyamanan"))
-        items.add(SlideModel(R.drawable.intro_3, "Geanka", "Aplikasi mudah dan cepat untuk membantu kamu"))
-        adapter.updateImage(items)
-        setSliderView()
+        introViewModel.addItemSlider()
+        introViewModel.itemLiveData.observe(this, { items ->
+            adapter.updateImage(items)
+            setSliderView()
+        })
     }
 
     private fun setSliderView() {

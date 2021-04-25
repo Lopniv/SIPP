@@ -7,6 +7,7 @@ import android.os.Looper
 import com.android.sipp.R
 import com.android.sipp.preference.Constants.KEY_USER_ID
 import com.android.sipp.preference.PreferenceManager
+import com.android.sipp.ui.activity.introactivity.IntroActivity
 import com.android.sipp.utils.Utils.start
 
 class SplashscreenActivity : AppCompatActivity() {
