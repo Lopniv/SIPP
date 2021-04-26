@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity
+package com.android.sipp.ui.activity.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,6 +1,5 @@
-package com.android.sipp.ui.activity.loginactivity
+package com.android.sipp.ui.activity.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.sipp.model.Users

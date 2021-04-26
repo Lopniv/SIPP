@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity.introactivity
+package com.android.sipp.ui.activity.intro
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,7 +10,7 @@ import com.android.sipp.R
 import com.android.sipp.adapter.SliderAdapter
 import com.android.sipp.databinding.ActivityIntroBinding
 import com.android.sipp.ui.activity.CategoryActivity
-import com.android.sipp.ui.activity.loginactivity.LoginActivity
+import com.android.sipp.ui.activity.login.LoginActivity
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 

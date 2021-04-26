@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.loginactivity.LoginActivity">
+    android:background="@color/white"
+    tools:context=".ui.activity.login.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/progressbar"
@@ -147,7 +148,6 @@
         android:textAllCaps="false"
         android:fontFamily="@font/gill_sans_ultra_bold_cond"
         app:cornerRadius="30dp"
-        app:backgroundTint="@color/green_1000"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

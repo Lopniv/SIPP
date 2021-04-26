@@ -16,6 +16,9 @@
     <string name="register_as">Daftarkan dirimu sebagai</string>
     <string name="register_succes">Akun kamu berhasil terdaftar, mohon tunggu dan cek email kamu untuk verifikasi</string>
     <string name="please_wait">Mohon Tunggu</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_pickup">Pilih Jenis Penjemputan</string>
+    <string name="choose">Pilih</string>
+    <string name="pickup_plan">Penjemputan Terjadwal</string>
+    <string name="desc_pickup_plan">Penjemputan terjadwal akan dilakukan<br/>3x/minggu, total penjemputan 12x/bulan</string>
 </resources>

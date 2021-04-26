@@ -1,7 +1,9 @@
 package com.android.sipp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.sipp.R
@@ -13,7 +15,8 @@ import com.android.sipp.ui.fragment.HomeFragment
 import com.android.sipp.ui.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+    View.OnClickListener {
 
     private lateinit var b: ActivityMainBinding
 
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun setListener() {
         b.bnv.setOnNavigationItemSelectedListener(this)
+        b.ibPickup.setOnClickListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -73,5 +77,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val fragment: Fragment = ProfileFragment()
         val manager = supportFragmentManager
         manager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.ib_pickup -> pickup()
+        }
+    }
+
+    private fun pickup() {
+        startActivity(Intent(this, PickupCategoryActivity::class.java))
     }
 }

@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity
+package com.android.sipp.ui.activity.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,12 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityRegisterBinding
 import com.android.sipp.model.Users
-import com.android.sipp.ui.activity.introactivity.IntroActivity
+import com.android.sipp.ui.activity.intro.IntroActivity
+import com.android.sipp.utils.Utils
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
@@ -45,6 +47,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private var password: String? = null
 
     private lateinit var b : ActivityRegisterBinding
+    private lateinit var registerViewModel: RegisterViewModel
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var user: FirebaseUser
@@ -64,8 +67,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun initiate() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-        //val storage = FirebaseStorage.getInstance()
-        //storageReference = storage.reference.child(REFERENCE_IMAGE_PROFILE_ADMINS)
+        registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
     }
 
     private fun setClickListener() {
@@ -138,82 +140,27 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun checkEmailInUser() {
-        showLoading(this, b.progressbar)
-        firestore.collection(COLLECTION_USER)
-            .whereEqualTo(FIELD_EMAIL, email)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    if (task.result?.isEmpty == true){
-                        checkEmailInIndustry()
-                    } else {
-                        hideLoading(this, b.progressbar)
-                        showMessage(b.root, "Maaf, email sudah digunakan")
-                    }
-                } else {
-                    hideLoading(this, b.progressbar)
-                    task.exception?.message?.let { message -> showMessage(b.root, message) }
-                }
-            }
-    }
-
-    private fun checkEmailInIndustry() {
-        firestore.collection(COLLECTION_INDUSTRY)
-            .whereEqualTo(FIELD_EMAIL, email)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    if (task.result?.isEmpty == true){
-                        requestCreateAccount()
-                    } else {
-                        hideLoading(this, b.progressbar)
-                        showMessage(b.root, "Maaf, email sudah digunakan")
-                    }
-                } else {
-                    hideLoading(this, b.progressbar)
-                    task.exception?.message?.let { message -> showMessage(b.root, message) }
-                }
-            }
-    }
-
-    private fun requestCreateAccount() {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful){
-                user = auth.currentUser
-                requestCreateUserData()
+        registerViewModel.checkEmailInUser(email!!, password!!, id!!, firstName!!, lastName!!, phone!!, category!!)
+        registerViewModel.loading.observe(this, { isLoading ->
+            if(isLoading == true) {
+                showLoading(this, b.progressbar)
             } else {
                 hideLoading(this, b.progressbar)
-                task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
-        }
-    }
-
-    private fun requestCreateUserData() {
-        val user = Users(id!!, firstName!!, lastName!!, email!!, phone!!, category!!)
-        firestore.collection(COLLECTION_USER)
-            .document(email!!)
-            .set(user)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    requestVerifyEmail()
-                } else {
-                    hideLoading(this, b.progressbar)
-                    task.exception?.message?.let { message -> showMessage(b.root, message) }
-                }
-            }
-    }
-
-    private fun requestVerifyEmail() {
-        user.sendEmailVerification().addOnCompleteListener { task ->
-            if (task.isSuccessful){
-                hideLoading(this, b.progressbar)
+        })
+        registerViewModel.successRegister.observe(this, { isSuccess ->
+            if (isSuccess == true) {
                 showToast(this, getString(R.string.register_succes))
                 start(this, IntroActivity::class.java)
-            } else {
-                hideLoading(this, b.progressbar)
-                task.exception?.message?.let { message -> showMessage(b.root, message) }
             }
-        }
+        })
+        registerViewModel.errorMessage.observe(this, { errorMessage ->
+            registerViewModel.showMessage.observe(this, { showMessage ->
+                if (showMessage == true) {
+                    showMessage(b.root, errorMessage)
+                }
+            })
+        })
     }
 
     override fun onClick(v: View?) {

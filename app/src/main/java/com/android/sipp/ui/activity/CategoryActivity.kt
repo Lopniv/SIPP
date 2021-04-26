@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityCategoryBinding
+import com.android.sipp.ui.activity.register.RegisterActivity
 import com.android.sipp.utils.Utils.Keys.CATEGORY
 import com.android.sipp.utils.Utils.Keys.VALUE_INDUSTRY
 import com.android.sipp.utils.Utils.Keys.VALUE_PERSONAL

@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity.introactivity
+package com.android.sipp.ui.activity.intro
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIPP">
-        <activity android:name=".ui.activity.CategoryActivity"></activity>
-        <activity android:name=".ui.activity.RegisterDetailActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.loginactivity.LoginActivity" />
-        <activity android:name=".ui.activity.introactivity.IntroActivity" />
+        <activity android:name=".ui.activity.PickupCategoryActivity"/>
+        <activity android:name=".ui.activity.CategoryActivity" />
+        <activity android:name=".ui.activity.register.RegisterDetailActivity" />
+        <activity android:name=".ui.activity.register.RegisterActivity" />
+        <activity android:name=".ui.activity.login.LoginActivity" />
+        <activity android:name=".ui.activity.intro.IntroActivity" />
         <activity android:name=".ui.activity.SplashscreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

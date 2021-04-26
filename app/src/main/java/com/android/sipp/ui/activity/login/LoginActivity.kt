@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity.loginactivity
+package com.android.sipp.ui.activity.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,25 +11,13 @@ import com.android.sipp.databinding.ActivityLoginBinding
 import com.android.sipp.model.Users
 import com.android.sipp.preference.PreferenceManager
 import com.android.sipp.ui.activity.MainActivity
-import com.android.sipp.utils.Utils
-import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
-import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_LAST_NAME
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PHONE
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_TYPE
 import com.android.sipp.utils.Utils.hideLoading
 import com.android.sipp.utils.Utils.showLoading
 import com.android.sipp.utils.Utils.showMessage
 import com.android.sipp.utils.Utils.start
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
