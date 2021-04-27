@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,167 +34,181 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_back" />
 
-    <HorizontalScrollView
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_pickup_plan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginEnd="45dp"
-                    android:layout_gravity="center"
-                    app:cardBackgroundColor="@color/green_1000"
-                    app:cardCornerRadius="20dp">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="20dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_pickup_plan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                            android:text="Penjemputan Terjadwal"
-                            android:textColor="@color/white"
-                            android:textSize="24sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_pickup_plan"
-                            android:layout_width="200dp"
-                            android:layout_height="200dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/bg_pickup"
-                            android:layout_below="@id/tv_pickup_plan"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_desc_plan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@id/iv_pickup_plan"
-                            android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                            android:textAlignment="center"
-                            android:text="Penjemputan terjadwal akan dilakukan\n3x/minggu, total penjemputan 12x/bulan"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_choose_plan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-20dp"
-                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                    android:padding="10dp"
-                    android:text="Pilih"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:textColor="@color/green_1000"
-                    app:cornerRadius="20dp"
-                    app:backgroundTint="@color/green_100"
-                    android:layout_below="@id/cv_pickup_plan"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_pickup_ondemand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginEnd="45dp"
-                    app:cardBackgroundColor="@color/green_1000"
-                    app:cardCornerRadius="20dp">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="20dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_pickup_ondemand"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                            android:text="@string/pickup_plan"
-                            android:textColor="@color/white"
-                            android:textSize="24sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_pickup_ondemand"
-                            android:layout_width="200dp"
-                            android:layout_height="200dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/bg_pickup"
-                            android:layout_below="@id/tv_pickup_ondemand"
-                            android:contentDescription="@string/app_name" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_desc_ondemand"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@id/iv_pickup_ondemand"
-                            android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                            android:textAlignment="center"
-                            android:text="@string/desc_pickup_plan"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_choose_ondemand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-20dp"
-                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
-                    android:padding="10dp"
-                    android:text="@string/choose"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:textColor="@color/green_1000"
-                    app:cornerRadius="20dp"
-                    app:backgroundTint="@color/green_100"
-                    android:layout_below="@id/cv_pickup_ondemand"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<HorizontalScrollView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_centerHorizontal="true"-->
+<!--android:layout_centerVertical="true"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/tv_title">-->
+
+<!--<LinearLayout-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="horizontal">-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cv_pickup_plan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="45dp"-->
+<!--            android:layout_marginStart="45dp"-->
+<!--            android:layout_marginEnd="45dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:cardBackgroundColor="@color/green_1000"-->
+<!--            app:cardCornerRadius="20dp">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="20dp">-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_pickup_plan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--                    android:text="Penjemputan Terjadwal"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="24sp" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_pickup_plan"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:src="@drawable/bg_pickup"-->
+<!--                    android:layout_below="@id/tv_pickup_plan"/>-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_desc_plan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_below="@id/iv_pickup_plan"-->
+<!--                    android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:text="Penjemputan terjadwal akan dilakukan\n3x/minggu, total penjemputan 12x/bulan"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btn_choose_plan"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="-20dp"-->
+<!--            android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Pilih"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/green_1000"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            app:backgroundTint="@color/green_100"-->
+<!--            android:layout_below="@id/cv_pickup_plan"/>-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cv_pickup_ondemand"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginStart="45dp"-->
+<!--            android:layout_marginTop="45dp"-->
+<!--            android:layout_marginEnd="45dp"-->
+<!--            app:cardBackgroundColor="@color/green_1000"-->
+<!--            app:cardCornerRadius="20dp">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="20dp">-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_pickup_ondemand"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--                    android:text="@string/pickup_plan"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="24sp" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_pickup_ondemand"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:src="@drawable/bg_pickup"-->
+<!--                    android:layout_below="@id/tv_pickup_ondemand"-->
+<!--                    android:contentDescription="@string/app_name" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_desc_ondemand"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_below="@id/iv_pickup_ondemand"-->
+<!--                    android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:text="@string/desc_pickup_plan"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btn_choose_ondemand"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="-20dp"-->
+<!--            android:fontFamily="@font/gill_sans_ultra_bold_cond"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="@string/choose"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/green_1000"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            app:backgroundTint="@color/green_100"-->
+<!--            android:layout_below="@id/cv_pickup_ondemand"/>-->
+
+<!--    </RelativeLayout>-->
+
+<!--</LinearLayout>-->
+
+<!--</HorizontalScrollView>-->

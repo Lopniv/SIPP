@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_pickup_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="@color/green_1000"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_pickup_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                android:text="Penjemputan Terjadwal"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/iv_pickup_plan"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_below="@id/tv_pickup_plan"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/bg_pickup" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_desc_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_pickup_plan"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                android:text="Penjemputan terjadwal akan dilakukan\n3x/minggu, total penjemputan 12x/bulan"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_choose_plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_pickup_plan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:fontFamily="@font/gill_sans_ultra_bold_cond"
+        android:padding="10dp"
+        android:text="@string/choose"
+        android:textAllCaps="false"
+        android:textColor="@color/green_1000"
+        android:textSize="16sp"
+        app:backgroundTint="@color/green_100"
+        app:cornerRadius="20dp" />
+
+</RelativeLayout>
