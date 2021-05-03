@@ -25,7 +25,7 @@ class PickupCategoryActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initiate() {
-        adapter = ItemPickupAdapter(arrayListOf())
+        adapter = ItemPickupAdapter(arrayListOf(), this)
     }
 
     private fun setListener() {
@@ -37,6 +37,7 @@ class PickupCategoryActivity : AppCompatActivity(), View.OnClickListener {
             ItemPickup(
                 "Penjemputan Terjadwal",
                 R.drawable.bg_pickup,
+                    30000,
                 "Penjemputan terjadwal akan dilakukan 3x/minggu, total penjemputan 12x/bulan"
             )
         )
@@ -44,7 +45,8 @@ class PickupCategoryActivity : AppCompatActivity(), View.OnClickListener {
             ItemPickup(
                 "Penjemputan Langsung",
                 R.drawable.bg_pickup,
-                "Penjemputan terjadwal akan dilakukan 3x/minggu, total penjemputan 12x/bulan"
+                    50000,
+                "Penjemputan akan dilakukan 1 hari setelah permintaan penjemputan"
             )
         )
         adapter.updateItem(model)
