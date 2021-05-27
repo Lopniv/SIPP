@@ -1,4 +1,4 @@
-package com.android.sipp.ui.activity
+package com.android.sipp.ui.activity.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,12 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityMainBinding
-import com.android.sipp.databinding.FragmentCartBinding
+import com.android.sipp.preference.Constants
+import com.android.sipp.preference.PreferenceManager
+import com.android.sipp.ui.activity.PickupCategoryActivity
 import com.android.sipp.ui.fragment.CartFragment
 import com.android.sipp.ui.fragment.HistoryFragment
 import com.android.sipp.ui.fragment.HomeFragment
@@ -18,19 +21,34 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
 
+    private lateinit var preferenceManager: PreferenceManager
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var b: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityMainBinding.inflate(layoutInflater)
         setContentView(b.root)
+        initiate()
         setListener()
         home()
+        checkStatusPickup()
+    }
+
+    private fun initiate() {
+        preferenceManager = PreferenceManager(this)
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
     private fun setListener() {
         b.bnv.setOnNavigationItemSelectedListener(this)
         b.ibPickup.setOnClickListener(this)
+    }
+
+    private fun checkStatusPickup() {
+        mainViewModel.checkStatusPickup(
+            preferenceManager.getUserId(Constants.KEY_USER_ID)!!
+        )
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

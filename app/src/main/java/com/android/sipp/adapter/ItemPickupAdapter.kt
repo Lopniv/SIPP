@@ -11,8 +11,8 @@ import androidx.annotation.NonNull
 import androidx.viewpager.widget.PagerAdapter
 import com.android.sipp.R
 import com.android.sipp.model.ItemPickup
-import com.android.sipp.ui.activity.PaymentActivity
-import com.android.sipp.ui.activity.PaymentActivity.Companion.KEY_PAYMENT
+import com.android.sipp.ui.activity.payment.PaymentActivity
+import com.android.sipp.ui.activity.payment.PaymentActivity.Companion.KEY_PAYMENT
 import com.google.android.material.button.MaterialButton
 import java.text.NumberFormat
 import java.util.*

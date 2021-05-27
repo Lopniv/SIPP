@@ -10,7 +10,7 @@ import com.android.sipp.R
 import com.android.sipp.databinding.ActivityLoginBinding
 import com.android.sipp.model.Users
 import com.android.sipp.preference.PreferenceManager
-import com.android.sipp.ui.activity.MainActivity
+import com.android.sipp.ui.activity.main.MainActivity
 import com.android.sipp.utils.Utils.hideLoading
 import com.android.sipp.utils.Utils.showLoading
 import com.android.sipp.utils.Utils.showMessage

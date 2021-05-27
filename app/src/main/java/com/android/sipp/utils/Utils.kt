@@ -18,6 +18,7 @@ object Utils {
         const val COLLECTION_USER = "User"
         const val COLLECTION_ADMIN = "Admin"
         const val COLLECTION_INDUSTRY = "Industry"
+        const val COLLECTION_PICKUP = "Pickup"
         const val FIELD_ID = "id"
         const val FIELD_FIRST_NAME = "firstName"
         const val FIELD_LAST_NAME = "lastName"
