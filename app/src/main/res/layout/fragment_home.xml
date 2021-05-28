@@ -20,7 +20,74 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="-25dp"
             android:layout_marginRight="30dp"
-            app:cardCornerRadius="20dp" />
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:id="@+id/placeholder_no_pickup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_no_pickup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                    android:textAlignment="center"
+                    android:text="@string/not_yet_pickup"
+                    android:textColor="@color/green_1000"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tv_no_pickup"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                    android:textAlignment="center"
+                    android:text="@string/description_no_pickup"
+                    android:textColor="@color/green_1000"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/placeholder_already_pickup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                    android:textAlignment="center"
+                    android:text="@string/not_yet_pickup"
+                    android:textColor="@color/green_1000"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gill_sans_ultra_bold_cond"
+                    android:textAlignment="center"
+                    android:text="@string/description_no_pickup"
+                    android:textColor="@color/green_1000"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <ImageView
             android:id="@+id/img_bg"

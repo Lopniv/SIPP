@@ -22,4 +22,6 @@
     <string name="pickup_plan">Penjemputan Terjadwal</string>
     <string name="desc_pickup_plan">Penjemputan terjadwal akan dilakukan<br />3x/minggu, total penjemputan 12x/bulan</string>
     <string name="order">Pesan</string>
+    <string name="not_yet_pickup">Kamu belum melakukan penjemputan</string>
+    <string name="description_no_pickup">Silahkan klik tombol jemput di bagian bawah</string>
 </resources>

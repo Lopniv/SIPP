@@ -3,6 +3,7 @@ package com.android.sipp.ui.activity.main
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.sipp.model.Order
 import com.android.sipp.utils.Utils
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
@@ -12,9 +13,9 @@ class MainViewModel : ViewModel() {
     private lateinit var firestore: FirebaseFirestore
 
     var loading = MutableLiveData<Boolean>()
-    var showMessage = MutableLiveData<Boolean>()
+    var status = MutableLiveData<Boolean>()
     var errorMessage = MutableLiveData<String>()
-    var successRegister = MutableLiveData<Boolean>()
+    var order = MutableLiveData<Order>()
 
     fun checkStatusPickup(userId: String) {
         firestore = FirebaseFirestore.getInstance()
@@ -25,19 +26,42 @@ class MainViewModel : ViewModel() {
             .get()
             .addOnSuccessListener{ document ->
                 if (document != null){
-                    Log.e("TAG", "DOC: ${document.data}")
+                    val amountPickup = document.data?.get("amountPickup") as Long
+                    val startDate = document.data?.get("startDate") as String
+                    val status = document.data?.get("status") as String
+                    val statusPayment = document.data?.get("statusPayment") as Boolean
+                    val type = document.data?.get("type") as String
+                    val userIdData = document.data?.get("userId") as String
+                    val order = Order(
+                        userIdData,
+                        amountPickup.toInt(),
+                        startDate,
+                        type,
+                        status,
+                        statusPayment
+                    )
+                    Log.e("TAG", "DATA: $order")
+
+                    this.order.value = order
+                    loading.value = false
+                    this.status.value = true
                 } else {
-//                    loading.value = false
-//                    document.exception?.message?.let { message -> errorMessage.value = message }
-//                    showMessage.value = true
+                    loading.value = false
+                    this.status.value = false
+                    errorMessage.value = "Document not available"
                 }
+            }
+            .addOnFailureListener{
+                loading.value = false
+                this.status.value = false
+                errorMessage.value = it.localizedMessage
             }
     }
 
     private fun defaultValue() {
-        successRegister.value = false
+        order.value = Order()
         loading.value = false
-        showMessage.value = false
+        status.value = false
         errorMessage.value = ""
     }
 }

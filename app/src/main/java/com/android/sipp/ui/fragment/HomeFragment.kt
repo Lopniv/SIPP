@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.sipp.databinding.FragmentHomeBinding
+import com.android.sipp.model.Order
 
-class HomeFragment : Fragment() {
+class HomeFragment(val order: Order) : Fragment() {
 
     private var binding : FragmentHomeBinding? = null
     private val b get() = binding!!
