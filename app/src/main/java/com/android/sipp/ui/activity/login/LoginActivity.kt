@@ -8,28 +8,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityLoginBinding
-import com.android.sipp.model.Users
+import com.android.sipp.model.Driver
+import com.android.sipp.model.Industry
+import com.android.sipp.model.Personal
 import com.android.sipp.preference.PreferenceManager
+import com.android.sipp.ui.activity.DriverActivity
 import com.android.sipp.ui.activity.main.MainActivity
 import com.android.sipp.utils.Utils.hideLoading
 import com.android.sipp.utils.Utils.showLoading
 import com.android.sipp.utils.Utils.showMessage
 import com.android.sipp.utils.Utils.start
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private var email: String? = null
     private var password: String? = null
-    private var userData: Users? = null
-    private var errorMessage: String? = null
+    private var personalData: Personal = Personal()
+    private var industryData: Industry = Industry()
+    private var driverData: Driver = Driver()
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var user: FirebaseUser
     private lateinit var b: ActivityLoginBinding
     private lateinit var pref: PreferenceManager
 
@@ -74,26 +76,45 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun checkEmailInUser() {
         loginViewModel.checkEmailInUser(email!!, password!!)
         loginViewModel.loading.observe(this, {
-            if (it == true){
+            if (it == true) {
                 showLoading(this, b.progressbar)
             } else {
                 hideLoading(this, b.progressbar)
             }
         })
-        loginViewModel.successSignIn.observe(this, {
-            if (it == true){
-                start(this, MainActivity::class.java)
-                finish()
-            }
+        loginViewModel.personalData.observe(this, {
+            personalData = it
         })
-        loginViewModel.userData.observe(this, {
-            userData = it
+        loginViewModel.industryData.observe(this, {
+            industryData = it
         })
-        loginViewModel.savePreference.observe(this, { saveData ->
-            if (saveData == true){
-                userData?.let { it -> pref.saveUserData(it) }
-            }
+        loginViewModel.driverData.observe(this, {
+            driverData = it
         })
+        loginViewModel.type.observe(this, { type ->
+            loginViewModel.successSignIn.observe(this, { signIn ->
+                if (signIn == true) {
+                    when (type) {
+                        "personal" -> {
+                            pref.savePersonalData(personalData)
+                            start(this, MainActivity::class.java)
+                            finish()
+                        }
+                        "industry" -> {
+                            pref.saveIndustryData(industryData)
+                            start(this, MainActivity::class.java)
+                            finish()
+                        }
+                        "driver" -> {
+                            pref.saveDriverData(driverData)
+                            start(this, DriverActivity::class.java)
+                            finish()
+                        }
+                    }
+                }
+            })
+        })
+
         loginViewModel.errorMessage.observe(this, { errorMessage ->
             loginViewModel.showMessage.observe(this, { showMessage ->
                 if (showMessage == true) {
@@ -105,7 +126,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.btn_back -> finish()
             R.id.btn_login -> checkEmailInUser()
         }

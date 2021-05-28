@@ -38,7 +38,7 @@ class PickupCategoryActivity : AppCompatActivity(), View.OnClickListener {
                 "Penjemputan Terjadwal",
                 R.drawable.bg_pickup,
                     30000,
-                "Penjemputan terjadwal akan dilakukan 3x/minggu, total penjemputan 12x/bulan"
+                "Penjemputan terjadwal dilakukan 3x/minggu, total penjemputan 12x/bulan"
             )
         )
         model.add(

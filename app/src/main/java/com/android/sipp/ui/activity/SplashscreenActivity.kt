@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.android.sipp.R
+import com.android.sipp.preference.Constants.KEY_TYPE
 import com.android.sipp.preference.Constants.KEY_USER_ID
 import com.android.sipp.preference.PreferenceManager
 import com.android.sipp.ui.activity.intro.IntroActivity
@@ -32,10 +33,12 @@ class SplashscreenActivity : AppCompatActivity() {
 
     private fun goToApp() {
         Handler(Looper.getMainLooper()).postDelayed({
-            if (pref.getUserId(KEY_USER_ID) == null){
-                start(this, IntroActivity::class.java)
-            } else {
+            if (pref.getType(KEY_TYPE) != null && pref.getType(KEY_TYPE) == "driver"){
+                start(this, DriverActivity::class.java)
+            } else if (pref.getType(KEY_TYPE) != null && pref.getType(KEY_TYPE) != "driver") {
                 start(this, MainActivity::class.java)
+            } else if (pref.getType(KEY_TYPE) == null){
+                start(this, IntroActivity::class.java)
             }
         }, TIME_LENGTH.toLong())
     }

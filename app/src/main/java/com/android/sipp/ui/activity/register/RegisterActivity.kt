@@ -10,11 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityRegisterBinding
-import com.android.sipp.model.Users
 import com.android.sipp.ui.activity.intro.IntroActivity
-import com.android.sipp.utils.Utils
-import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
-import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID

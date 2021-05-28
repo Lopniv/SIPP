@@ -17,14 +17,14 @@ class PaymentViewModel : ViewModel(){
     var errorMessage = MutableLiveData<String>()
     var status = MutableLiveData<Boolean>()
 
-    fun order(userId: String, amountPickup: Int, startDate: String, type: String, status: String, statusPayment: Boolean) {
+    fun order(email: String, amountPickup: Int, startDate: String, type: String, status: String, statusPayment: Boolean) {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         defaultValue()
         loading.value = true
-        val order = Order(userId, amountPickup, startDate, type, status, statusPayment)
+        val order = Order(email, amountPickup, startDate, type, status, statusPayment)
         firestore.collection(COLLECTION_PICKUP)
-            .document(userId)
+            .document(email)
             .set(order)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful){

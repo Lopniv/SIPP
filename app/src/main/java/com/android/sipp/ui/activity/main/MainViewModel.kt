@@ -25,15 +25,15 @@ class MainViewModel : ViewModel() {
             .document(userId)
             .get()
             .addOnSuccessListener{ document ->
-                if (document != null){
+                if (document.exists()){
                     val amountPickup = document.data?.get("amountPickup") as Long
                     val startDate = document.data?.get("startDate") as String
                     val status = document.data?.get("status") as String
                     val statusPayment = document.data?.get("statusPayment") as Boolean
                     val type = document.data?.get("type") as String
-                    val userIdData = document.data?.get("userId") as String
+                    val email = document.data?.get("email") as String
                     val order = Order(
-                        userIdData,
+                        email,
                         amountPickup.toInt(),
                         startDate,
                         type,

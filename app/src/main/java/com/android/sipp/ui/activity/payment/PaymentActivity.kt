@@ -103,7 +103,7 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
         when(title){
             "Penjemputan Terjadwal" -> {
                 paymentViewModel.order(
-                    preferenceManager.getUserId(Constants.KEY_USER_ID)!!,
+                    preferenceManager.getUserId(Constants.KEY_EMAIL)!!,
                     amountPickup,
                     now,
                     "terjadwal",
@@ -113,7 +113,7 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
             }
             "Penjemputan Langsung" -> {
                 paymentViewModel.order(
-                    preferenceManager.getUserId(Constants.KEY_USER_ID)!!,
+                    preferenceManager.getUserId(Constants.KEY_EMAIL)!!,
                     1,
                     now,
                     "langsung",

@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 object Utils {
     object FirestoreKeys {
         const val COLLECTION_USER = "User"
-        const val COLLECTION_ADMIN = "Admin"
+        const val COLLECTION_DRIVER = "Driver"
         const val COLLECTION_INDUSTRY = "Industry"
         const val COLLECTION_PICKUP = "Pickup"
         const val FIELD_ID = "id"

@@ -24,4 +24,13 @@
     <string name="order">Pesan</string>
     <string name="not_yet_pickup">Kamu belum melakukan penjemputan</string>
     <string name="description_no_pickup">Silahkan klik tombol jemput di bagian bawah</string>
+    <string name="_0">0</string>
+    <string name="start_date">Tanggal mulai</string>
+    <string name="ex_start_date">Friday, May 28, 2021</string>
+    <string name="status">Status</string>
+    <string name="end_date">Tanggal selesai</string>
+    <string name="payment">Pembayaran</string>
+    <string name="paid">Sudah dibayar</string>
+    <string name="active">Aktif</string>
+    <string name="amount_pickup">Sisa Penjemputan</string>
 </resources>

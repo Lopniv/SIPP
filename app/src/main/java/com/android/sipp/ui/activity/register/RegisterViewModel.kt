@@ -2,7 +2,7 @@ package com.android.sipp.ui.activity.register
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.sipp.model.Users
+import com.android.sipp.model.Personal
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
@@ -70,7 +70,7 @@ class RegisterViewModel : ViewModel() {
     private fun requestCreateAccount(email: String, password: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful){
-                user = auth.currentUser
+                user = auth.currentUser!!
                 requestCreateUserData(email, id, firstName, lastName, phone, category)
             } else {
                 loading.value = false
@@ -81,7 +81,7 @@ class RegisterViewModel : ViewModel() {
     }
 
     private fun requestCreateUserData(email: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
-        val user = Users(id, firstName, lastName, email, phone, category)
+        val user = Personal(id, firstName, lastName, email, phone, category)
         firestore.collection(COLLECTION_USER)
             .document(email)
             .set(user)

@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(b.root)
         initiate()
         setListener()
+        home(order)
         checkStatusPickup()
-        home()
     }
 
     private fun initiate() {
@@ -68,10 +68,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             if (status == true){
                 mainViewModel.order.observe(this, { order ->
                     this.order = order
+                    home(order)
                 })
             } else {
                 mainViewModel.errorMessage.observe(this, { message ->
                     Log.e("TAG", "Error message: $message")
+                    home(order)
                 })
             }
         })
@@ -80,7 +82,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_home -> {
-                home()
+                home(order)
                 return true
             }
             R.id.menu_cart -> {
@@ -99,7 +101,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return false
     }
 
-    private fun home() {
+    private fun home(order: Order) {
         val fragment: Fragment = HomeFragment(order)
         val manager = supportFragmentManager
         manager.beginTransaction().replace(R.id.fragment_container, fragment).commit()

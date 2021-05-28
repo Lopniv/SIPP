@@ -1,12 +1,32 @@
 package com.android.sipp.preference
 
 import android.content.Context
-import com.android.sipp.model.Users
+import com.android.sipp.model.Driver
+import com.android.sipp.model.Industry
+import com.android.sipp.model.Personal
 
 class PreferenceManager(context: Context) {
     private val preferences = context.getSharedPreferences("User_Pref", Context.MODE_PRIVATE)
 
-    fun saveUserData(user: Users){
+    fun savePersonalData(user: Personal){
+        setUserId(Constants.KEY_USER_ID, user.id)
+        setFirstName(Constants.KEY_FIRST_NAME, user.firstName)
+        setLastName(Constants.KEY_LAST_NAME, user.lastName)
+        setEmail(Constants.KEY_EMAIL, user.email)
+        setPhone(Constants.KEY_PHONE, user.phone)
+        setType(Constants.KEY_TYPE, user.type)
+    }
+
+    fun saveIndustryData(user: Industry){
+        setUserId(Constants.KEY_USER_ID, user.id)
+        setFirstName(Constants.KEY_FIRST_NAME, user.firstName)
+        setLastName(Constants.KEY_LAST_NAME, user.lastName)
+        setEmail(Constants.KEY_EMAIL, user.email)
+        setPhone(Constants.KEY_PHONE, user.phone)
+        setType(Constants.KEY_TYPE, user.type)
+    }
+
+    fun saveDriverData(user: Driver){
         setUserId(Constants.KEY_USER_ID, user.id)
         setFirstName(Constants.KEY_FIRST_NAME, user.firstName)
         setLastName(Constants.KEY_LAST_NAME, user.lastName)
