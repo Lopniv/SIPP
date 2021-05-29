@@ -1,8 +1,15 @@
 package com.android.sipp.ui.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.sipp.adapter.DriverPickupIndustryAdapter
+import com.android.sipp.adapter.DriverPickupPersonalAdapter
 import com.android.sipp.databinding.ActivityDriverBinding
 import com.android.sipp.model.Industry
 import com.android.sipp.model.Personal
@@ -25,16 +32,37 @@ class DriverActivity : AppCompatActivity() {
     private var industryList: ArrayList<Industry> = arrayListOf()
 
     private lateinit var b: ActivityDriverBinding
+    private lateinit var personalAdapter: DriverPickupPersonalAdapter
+    private lateinit var industryAdapter: DriverPickupIndustryAdapter
     private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityDriverBinding.inflate(layoutInflater)
         setContentView(b.root)
+        initiate()
+        initRecyclerView()
         getData()
     }
 
+    private fun initiate() {
+        personalAdapter = DriverPickupPersonalAdapter(arrayListOf(), this)
+        industryAdapter = DriverPickupIndustryAdapter(arrayListOf(), this)
+    }
+
+    private fun initRecyclerView() {
+        b.rvPersonal.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = personalAdapter
+        }
+        b.rvIndustry.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = industryAdapter
+        }
+    }
+
     private fun getData() {
+        b.progressbar.visibility = VISIBLE
         firestore = FirebaseFirestore.getInstance()
         firestore.collection(COLLECTION_PICKUP)
             .get()
@@ -93,9 +121,19 @@ class DriverActivity : AppCompatActivity() {
                                 data.getString(FIELD_TYPE)!!
                             )
                             industryList.add(industry)
+                            setupRecyclerView()
                         }
                     }
                 }
         }
+        Handler(Looper.getMainLooper()).postDelayed({
+            setupRecyclerView()
+        }, 1000)
+    }
+
+    private fun setupRecyclerView() {
+        personalAdapter.updatePersonalItem(personalList)
+        industryAdapter.updatePersonalItem(industryList)
+        b.progressbar.visibility = GONE
     }
 }

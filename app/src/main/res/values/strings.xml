@@ -33,4 +33,8 @@
     <string name="paid">Sudah dibayar</string>
     <string name="active">Aktif</string>
     <string name="amount_pickup">Sisa Penjemputan</string>
+    <string name="ex_name">Abdullah Fahmi</string>
+    <string name="ex_email">bloginfo693@gmail.com</string>
+    <string name="personal">Personal</string>
+    <string name="industry">Industry</string>
 </resources>

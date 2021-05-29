@@ -9,4 +9,5 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="half_transparent">#6F000000</color>
     <color name="grey">#808080</color>
+    <color name="lightGrey">#C8C8C8</color>
 </resources>
