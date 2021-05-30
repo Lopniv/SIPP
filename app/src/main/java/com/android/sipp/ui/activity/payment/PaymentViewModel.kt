@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.android.sipp.model.Order
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PaymentViewModel : ViewModel(){
@@ -17,12 +16,12 @@ class PaymentViewModel : ViewModel(){
     var errorMessage = MutableLiveData<String>()
     var status = MutableLiveData<Boolean>()
 
-    fun order(email: String, amountPickup: Int, startDate: String, type: String, status: String, statusPayment: Boolean) {
+    fun order(email: String, name: String, amountPickup: Int, startDate: String, pickupType: String, type: String, status: String, statusPickup: String, statusPayment: Boolean) {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         defaultValue()
         loading.value = true
-        val order = Order(email, amountPickup, startDate, type, status, statusPayment)
+        val order = Order(email, name, amountPickup, startDate, pickupType, type, status, statusPickup, statusPayment)
         firestore.collection(COLLECTION_PICKUP)
             .document(email)
             .set(order)

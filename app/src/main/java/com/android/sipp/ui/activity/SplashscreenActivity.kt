@@ -6,8 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import com.android.sipp.R
 import com.android.sipp.preference.Constants.KEY_TYPE
-import com.android.sipp.preference.Constants.KEY_USER_ID
 import com.android.sipp.preference.PreferenceManager
+import com.android.sipp.ui.activity.driver.DriverActivity
 import com.android.sipp.ui.activity.intro.IntroActivity
 import com.android.sipp.ui.activity.main.MainActivity
 import com.android.sipp.utils.Utils.start

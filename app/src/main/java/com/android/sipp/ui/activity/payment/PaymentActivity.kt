@@ -99,25 +99,32 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
         val dateFormat = SimpleDateFormat("EEEE, MMM d, yyyy")
         val now = dateFormat.format(calendar.time)
         val amountPickup = duration*12
+        val name = "${preferenceManager.getFirstName(Constants.KEY_FIRST_NAME)} ${preferenceManager.getLastName(Constants.KEY_LAST_NAME)}"
         Log.e("TAG", "DATE: $now")
         when(title){
             "Penjemputan Terjadwal" -> {
                 paymentViewModel.order(
                     preferenceManager.getUserId(Constants.KEY_EMAIL)!!,
+                    name,
                     amountPickup,
                     now,
                     "terjadwal",
+                    preferenceManager.getType(Constants.KEY_TYPE)!!,
                     "active",
+                    "not started",
                     false
                 )
             }
             "Penjemputan Langsung" -> {
                 paymentViewModel.order(
                     preferenceManager.getUserId(Constants.KEY_EMAIL)!!,
+                    name,
                     1,
                     now,
                     "langsung",
+                    preferenceManager.getType(Constants.KEY_TYPE)!!,
                     "active",
+                    "not started",
                     false
                 )
             }

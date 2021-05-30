@@ -19,12 +19,21 @@ object Utils {
         const val COLLECTION_DRIVER = "Driver"
         const val COLLECTION_INDUSTRY = "Industry"
         const val COLLECTION_PICKUP = "Pickup"
+        //USER
         const val FIELD_ID = "id"
         const val FIELD_FIRST_NAME = "firstName"
         const val FIELD_LAST_NAME = "lastName"
         const val FIELD_EMAIL = "email"
         const val FIELD_PHONE = "phone"
         const val FIELD_TYPE = "type"
+        //ORDER
+        const val FIELD_PICKUP_TYPE = "pickupType"
+        const val FIELD_NAME = "name"
+        const val FIELD_AMOUNT_PICKUP = "amountPickup"
+        const val FIELD_START_DATE = "startDate"
+        const val FIELD_STATUS = "status"
+        const val FIELD_STATUS_PAYMENT = "statusPayment"
+        const val FIELD_STATUS_PICKUP = "statusPickup"
     }
 
     object Keys {

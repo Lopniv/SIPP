@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.sipp.model.Order
-import com.android.sipp.utils.Utils
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
-import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainViewModel : ViewModel() {
@@ -30,14 +28,20 @@ class MainViewModel : ViewModel() {
                     val startDate = document.data?.get("startDate") as String
                     val status = document.data?.get("status") as String
                     val statusPayment = document.data?.get("statusPayment") as Boolean
+                    val pickupType = document.data?.get("pickupType") as String
                     val type = document.data?.get("type") as String
                     val email = document.data?.get("email") as String
+                    val name = document.data?.get("name") as String
+                    val statusPickup = document.data?.get("statusPickup") as String
                     val order = Order(
                         email,
+                        name,
                         amountPickup.toInt(),
                         startDate,
+                        pickupType,
                         type,
                         status,
+                        statusPickup,
                         statusPayment
                     )
                     Log.e("TAG", "DATA: $order")

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.driver.DetailDriverPickupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pickup"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/green_500"
+            android:layout_below="@id/iv_bg"/>
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_profile"
+            android:layout_below="@id/view"
+            android:layout_margin="10dp"
+            app:tint="@color/green_1000"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/ex_name"
+            android:textColor="@color/green_1000"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/gill_sans_bold_cond"
+            android:layout_below="@id/view"
+            android:layout_toEndOf="@id/iv_profile"/>
+
+        <ImageView
+            android:id="@+id/iv_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_payment"
+            android:layout_below="@id/iv_profile"
+            android:layout_margin="10dp"
+            app:tint="@color/green_1000"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/paid"
+            android:textColor="@color/green_1000"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/gill_sans_bold_cond"
+            android:layout_below="@id/tv_name"
+            android:layout_toEndOf="@id/iv_profile"/>
+
+        <ImageView
+            android:id="@+id/iv_status_pickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_status"
+            android:layout_below="@id/iv_payment"
+            android:layout_margin="10dp"
+            app:tint="@color/green_1000"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status_pickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Belum di jemput"
+            android:textColor="@color/green_1000"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/gill_sans_bold_cond"
+            android:layout_below="@id/tv_payment"
+            android:layout_toEndOf="@id/iv_profile"/>
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_location"
+            android:layout_below="@id/iv_status_pickup"
+            android:layout_margin="10dp"
+            app:tint="@color/green_1000"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/ex_address"
+            android:textColor="@color/green_1000"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/gill_sans_bold_cond"
+            android:layout_below="@id/tv_status_pickup"
+            android:layout_toEndOf="@id/iv_profile"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

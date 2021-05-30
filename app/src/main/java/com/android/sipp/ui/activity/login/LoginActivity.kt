@@ -12,7 +12,7 @@ import com.android.sipp.model.Driver
 import com.android.sipp.model.Industry
 import com.android.sipp.model.Personal
 import com.android.sipp.preference.PreferenceManager
-import com.android.sipp.ui.activity.DriverActivity
+import com.android.sipp.ui.activity.driver.DriverActivity
 import com.android.sipp.ui.activity.main.MainActivity
 import com.android.sipp.utils.Utils.hideLoading
 import com.android.sipp.utils.Utils.showLoading

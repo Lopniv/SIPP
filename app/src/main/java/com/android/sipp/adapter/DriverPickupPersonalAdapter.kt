@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sipp.R
 import com.android.sipp.databinding.ItemDriverPickupBinding
-import com.android.sipp.model.Personal
-import java.util.*
+import com.android.sipp.model.Order
+import com.android.sipp.utils.Listener
+import java.util.ArrayList
 
-class DriverPickupPersonalAdapter (var personal: ArrayList<Personal>, var context: Context) :
+class DriverPickupPersonalAdapter (var order: ArrayList<Order>, var context: Context) :
     RecyclerView.Adapter<DriverPickupPersonalAdapter.DriverPickupViewHolder>() {
 
-    fun updatePersonalItem(personal: ArrayList<Personal>) {
-        this.personal.clear()
-        this.personal.addAll(personal)
+    var listener: Listener? = null
+
+    fun updatePersonalItem(order: ArrayList<Order>) {
+        this.order.clear()
+        this.order.addAll(order)
         notifyDataSetChanged()
     }
 
@@ -31,19 +34,24 @@ class DriverPickupPersonalAdapter (var personal: ArrayList<Personal>, var contex
         holder: DriverPickupViewHolder,
         position: Int
     ) {
-        holder.bind(personal[position])
+        holder.bind(order[position])
+        holder.itemView.setOnClickListener{
+            listener?.onItemClick(order[position])
+        }
     }
 
-    override fun getItemCount() = personal.size
+    override fun getItemCount() = order.size
 
     class DriverPickupViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val b = ItemDriverPickupBinding.bind(view)
         private val customerName = b.tvName
         private val customerEmail = b.tvEmail
+        private val amountPickup = b.tvAmountPickup
         @SuppressLint("SetTextI18n")
-        fun bind(personal: Personal){
-            customerName.text = "${personal.firstName} ${personal.lastName}"
-            customerEmail.text = personal.email
+        fun bind(order: Order){
+            customerName.text = order.name
+            customerEmail.text = order.email
+            amountPickup.text = order.amountPickup.toString()
         }
     }
 }
