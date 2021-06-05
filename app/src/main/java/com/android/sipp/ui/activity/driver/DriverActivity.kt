@@ -13,6 +13,7 @@ import com.android.sipp.adapter.DriverPickupIndustryAdapter
 import com.android.sipp.adapter.DriverPickupPersonalAdapter
 import com.android.sipp.databinding.ActivityDriverBinding
 import com.android.sipp.model.Order
+import com.android.sipp.ui.activity.driver.DetailDriverPickupActivity.Companion.ORDER_DATA
 import com.android.sipp.utils.Listener
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_AMOUNT_PICKUP
@@ -169,7 +170,7 @@ class DriverActivity : AppCompatActivity(), Listener {
 
     override fun onItemClick(order: Order) {
         val detail = Intent(this, DetailDriverPickupActivity::class.java)
-        detail.putExtra("ORDER", order)
+        detail.putExtra(ORDER_DATA, order)
         startActivity(detail)
     }
 }
