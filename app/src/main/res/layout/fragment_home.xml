@@ -254,6 +254,30 @@
                 android:background="@drawable/bg_round"
                 android:orientation="vertical">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Berita"
+                    android:textColor="@color/green_1000"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/gill_sans_bold_cond"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/green_100"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_news"/>
+
             </LinearLayout>
 
         </RelativeLayout>
