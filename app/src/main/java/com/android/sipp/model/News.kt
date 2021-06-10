@@ -6,5 +6,5 @@ data class News(
     var title: String = "",
     var content: String = "",
     var link: String = "",
-    var image: Int
+    var image: Int = 0
 )

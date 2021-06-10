@@ -7,9 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.sipp.R
 import com.android.sipp.databinding.ItemNewsBinding
 import com.android.sipp.model.News
+import com.bumptech.glide.Glide
 
 class NewsAdapter(var news: ArrayList<News>)
     : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+
+    fun updateNews(news: ArrayList<News>) {
+        this.news = news
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
     : ViewHolder = ViewHolder(
@@ -29,7 +35,11 @@ class NewsAdapter(var news: ArrayList<News>)
             b.tvTime.text = news.time
             b.tvTitle.text = news.title
             b.tvContent.text = news.content
-            b.ivNews.setImageResource(news.image)
+            Glide.with(itemView.context)
+                .load(news.image)
+                .centerCrop()
+                .placeholder(R.drawable.ic_refresh)
+                .into(b.ivNews)
         }
     }
 }

@@ -10,11 +10,16 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.sipp.adapter.NewsAdapter
 import com.android.sipp.databinding.FragmentHomeBinding
 import com.android.sipp.model.Order
+import com.android.sipp.utils.Dummy.generateNews
 
 class HomeFragment(val order: Order) : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+    private lateinit var newsAdapter: NewsAdapter
 
     private var binding : FragmentHomeBinding? = null
     private val b get() = binding!!
@@ -28,7 +33,13 @@ class HomeFragment(val order: Order) : Fragment(), SwipeRefreshLayout.OnRefreshL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         b.refresh.setOnRefreshListener(this)
+        initiate()
         setupData()
+        setupRecyclerView()
+    }
+
+    private fun initiate() {
+        newsAdapter = NewsAdapter(arrayListOf())
     }
 
     @SuppressLint("SetTextI18n")
@@ -48,6 +59,14 @@ class HomeFragment(val order: Order) : Fragment(), SwipeRefreshLayout.OnRefreshL
             b.placeholderAlreadyPickup.visibility = GONE
             b.placeholderNoPickup.visibility = VISIBLE
         }
+    }
+
+    private fun setupRecyclerView() {
+        b.rvNews.apply {
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+        newsAdapter.updateNews(generateNews())
     }
 
     override fun onDestroyView() {
