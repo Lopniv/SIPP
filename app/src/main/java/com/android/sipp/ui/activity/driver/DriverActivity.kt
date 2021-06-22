@@ -16,6 +16,7 @@ import com.android.sipp.model.Order
 import com.android.sipp.ui.activity.driver.DetailDriverPickupActivity.Companion.ORDER_DATA
 import com.android.sipp.utils.Listener
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ADDRESS
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_AMOUNT_PICKUP
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_NAME
@@ -83,7 +84,8 @@ class DriverActivity : AppCompatActivity(), Listener {
                         document.data[FIELD_TYPE] as String,
                         document.data[FIELD_STATUS] as String,
                         document.data[FIELD_STATUS_PICKUP] as String,
-                        document.data[FIELD_STATUS_PAYMENT] as Boolean
+                        document.data[FIELD_STATUS_PAYMENT] as Boolean,
+                        document.data[FIELD_ADDRESS] as String
                     )
                     orders.add(order)
                 }

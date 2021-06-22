@@ -2,6 +2,7 @@ package com.android.sipp.ui.activity.register
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.sipp.model.Industry
 import com.android.sipp.model.Personal
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
@@ -21,7 +22,8 @@ class RegisterViewModel : ViewModel() {
     var errorMessage = MutableLiveData<String>()
     var successRegister = MutableLiveData<Boolean>()
 
-    fun checkEmailInUser(email: String, password: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
+    fun checkEmailInUser(email: String, password: String, id: String, firstName: String, lastName: String,
+                         phone: String, category: String, address: String, pickup: String, sumTrash: String, desc: String) {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         defaultValue()
@@ -32,7 +34,7 @@ class RegisterViewModel : ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful){
                     if (task.result?.isEmpty == true){
-                        checkEmailInIndustry(email, password, id, firstName, lastName, phone, category)
+                        checkEmailInIndustry(email, password, id, firstName, lastName, phone, category, address, pickup, sumTrash, desc)
                     } else {
                         loading.value = false
                         errorMessage.value = "Maaf, email sudah digunakan"
@@ -46,14 +48,15 @@ class RegisterViewModel : ViewModel() {
             }
     }
 
-    private fun checkEmailInIndustry(email: String, password: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
+    private fun checkEmailInIndustry(email: String, password: String, id: String, firstName: String, lastName: String,
+                                     phone: String, category: String, address: String, pickup: String, sumTrash: String, desc: String) {
         firestore.collection(COLLECTION_INDUSTRY)
             .whereEqualTo(FIELD_EMAIL, email)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful){
                     if (task.result?.isEmpty == true){
-                        requestCreateAccount(email, password, id, firstName, lastName, phone, category)
+                        requestCreateAccount(email, password, id, firstName, lastName, phone, category, address, pickup, sumTrash, desc)
                     } else {
                         loading.value = false
                         errorMessage.value = "Maaf, email sudah digunakan"
@@ -67,11 +70,12 @@ class RegisterViewModel : ViewModel() {
             }
     }
 
-    private fun requestCreateAccount(email: String, password: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
+    private fun requestCreateAccount(email: String, password: String, id: String, firstName: String, lastName: String,
+                                     phone: String, category: String, address: String, pickup: String, sumTrash: String, desc: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful){
                 user = auth.currentUser!!
-                requestCreateUserData(email, id, firstName, lastName, phone, category)
+                requestCreateUserData(email, id, firstName, lastName, phone, category, address, pickup, sumTrash, desc)
             } else {
                 loading.value = false
                 task.exception?.message?.let { message -> errorMessage.value = message }
@@ -80,20 +84,37 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    private fun requestCreateUserData(email: String, id: String, firstName: String, lastName: String, phone: String, category: String) {
-        val user = Personal(id, firstName, lastName, email, phone, category)
-        firestore.collection(COLLECTION_USER)
-            .document(email)
-            .set(user)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    requestVerifyEmail()
-                } else {
-                    loading.value = false
-                    task.exception?.message?.let { message -> errorMessage.value = message }
-                    showMessage.value = true
+    private fun requestCreateUserData(email: String, id: String, firstName: String, lastName: String,
+                                      phone: String, category: String, address: String, pickup: String, sumTrash: String, desc: String) {
+        if (category == "personal"){
+            val user = Personal(id, firstName, lastName, email, phone, category, address)
+            firestore.collection(COLLECTION_USER)
+                .document(email)
+                .set(user)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        requestVerifyEmail()
+                    } else {
+                        loading.value = false
+                        task.exception?.message?.let { message -> errorMessage.value = message }
+                        showMessage.value = true
+                    }
                 }
-            }
+        } else if (category == "industry"){
+            val user = Industry(id, firstName, lastName, email, phone, category, address, pickup, sumTrash, desc)
+            firestore.collection(COLLECTION_INDUSTRY)
+                .document(email)
+                .set(user)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        requestVerifyEmail()
+                    } else {
+                        loading.value = false
+                        task.exception?.message?.let { message -> errorMessage.value = message }
+                        showMessage.value = true
+                    }
+                }
+        }
     }
 
     private fun requestVerifyEmail() {

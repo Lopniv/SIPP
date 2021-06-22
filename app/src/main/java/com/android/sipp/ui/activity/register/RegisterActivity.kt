@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.sipp.R
 import com.android.sipp.databinding.ActivityRegisterBinding
 import com.android.sipp.ui.activity.intro.IntroActivity
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ADDRESS
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
@@ -40,6 +41,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private var lastName: String? = null
     private var email: String? = null
     private var phone: String? = null
+    private var address: String? = null
     private var password: String? = null
 
     private lateinit var b : ActivityRegisterBinding
@@ -78,6 +80,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun setView() {
         if (category == VALUE_PERSONAL){
             b.btnRegister.text = getString(R.string.register)
+        } else {
+            b.btnRegister.text = getString(R.string.next)
         }
     }
 
@@ -87,6 +91,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         b.etFirstName.addTextChangedListener(textWatcher)
         b.etLastName.addTextChangedListener(textWatcher)
         b.etPhone.addTextChangedListener(textWatcher)
+        b.etAddress.addTextChangedListener(textWatcher)
         b.etPassword.addTextChangedListener(textWatcher)
     }
 
@@ -99,11 +104,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 b.etFirstName.text.toString().isNotEmpty() &&
                 b.etLastName.text.toString().isNotEmpty() &&
                 b.etPhone.text.toString().isNotEmpty() &&
+                b.etAddress.text.toString().isNotEmpty() &&
                 b.etPassword.text.toString().isNotEmpty()
             firstName = b.etFirstName.text.toString()
             lastName = b.etLastName.text.toString()
             email = b.etEmail.text.toString()
             phone = b.etPhone.text.toString()
+            address = b.etAddress.text.toString()
             password = b.etPassword.text.toString()
         }
     }
@@ -130,13 +137,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             detailRegister.putExtra(FIELD_EMAIL, email)
             detailRegister.putExtra(FIELD_PHONE, phone)
             detailRegister.putExtra(FIELD_TYPE, category)
+            detailRegister.putExtra(FIELD_ADDRESS, address)
             detailRegister.putExtra(PASSWORD, password)
             startActivity(detailRegister)
         }
     }
 
     private fun checkEmailInUser() {
-        registerViewModel.checkEmailInUser(email!!, password!!, id!!, firstName!!, lastName!!, phone!!, category!!)
+        registerViewModel.checkEmailInUser(email!!, password!!, id!!, firstName!!, lastName!!, phone!!, category!!, address!!,
+            "", "", "")
         registerViewModel.loading.observe(this, { isLoading ->
             if(isLoading == true) {
                 showLoading(this, b.progressbar)

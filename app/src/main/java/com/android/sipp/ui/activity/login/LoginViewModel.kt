@@ -8,11 +8,16 @@ import com.android.sipp.model.Personal
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_DRIVER
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_INDUSTRY
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_USER
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ADDRESS
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_DESCRIPTION
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_EMAIL
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_FIRST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ID
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_LAST_NAME
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PHONE
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_PICKUP
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_STATUS_PICKUP
+import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_SUM_TRASH
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_TYPE
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -55,7 +60,8 @@ class LoginViewModel : ViewModel() {
                             data.getString(FIELD_LAST_NAME)!!,
                             data.getString(FIELD_EMAIL)!!,
                             data.getString(FIELD_PHONE)!!,
-                            data.getString(FIELD_TYPE)!!
+                            data.getString(FIELD_TYPE)!!,
+                            data.getString(FIELD_ADDRESS)!!
                         )
                         requestSignIn(user, email, password, "personal")
                     }
@@ -83,7 +89,11 @@ class LoginViewModel : ViewModel() {
                             data.getString(FIELD_LAST_NAME)!!,
                             data.getString(FIELD_EMAIL)!!,
                             data.getString(FIELD_PHONE)!!,
-                            data.getString(FIELD_TYPE)!!
+                            data.getString(FIELD_TYPE)!!,
+                            data.getString(FIELD_ADDRESS)!!,
+                            data.getString(FIELD_PICKUP)!!,
+                            data.getString(FIELD_SUM_TRASH)!!,
+                            data.getString(FIELD_DESCRIPTION)!!
                         )
                         requestSignIn(industry, email, password, "industry")
                     }
@@ -113,7 +123,8 @@ class LoginViewModel : ViewModel() {
                             data.getString(FIELD_LAST_NAME)!!,
                             data.getString(FIELD_EMAIL)!!,
                             data.getString(FIELD_PHONE)!!,
-                            data.getString(FIELD_TYPE)!!
+                            data.getString(FIELD_TYPE)!!,
+                            data.getString(FIELD_ADDRESS)!!
                         )
                         requestSignIn(driver, email, password, "driver")
                     }

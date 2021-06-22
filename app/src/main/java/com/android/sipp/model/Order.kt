@@ -13,5 +13,6 @@ data class Order(
     var type: String = "",
     var status: String = "",
     var statusPickup: String = "",
-    var statusPayment: Boolean = false
+    var statusPayment: Boolean = false,
+    var address: String = ""
 ) : Parcelable

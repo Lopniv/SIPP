@@ -16,12 +16,12 @@ class PaymentViewModel : ViewModel(){
     var errorMessage = MutableLiveData<String>()
     var status = MutableLiveData<Boolean>()
 
-    fun order(email: String, name: String, amountPickup: Int, startDate: String, pickupType: String, type: String, status: String, statusPickup: String, statusPayment: Boolean) {
+    fun order(email: String, name: String, amountPickup: Int, startDate: String, pickupType: String, type: String, status: String, statusPickup: String, statusPayment: Boolean, address: String) {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         defaultValue()
         loading.value = true
-        val order = Order(email, name, amountPickup, startDate, pickupType, type, status, statusPickup, statusPayment)
+        val order = Order(email, name, amountPickup, startDate, pickupType, type, status, statusPickup, statusPayment, address)
         firestore.collection(COLLECTION_PICKUP)
             .document(email)
             .set(order)

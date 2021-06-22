@@ -15,6 +15,7 @@ class PreferenceManager(context: Context) {
         setEmail(Constants.KEY_EMAIL, user.email)
         setPhone(Constants.KEY_PHONE, user.phone)
         setType(Constants.KEY_TYPE, user.type)
+        setType(Constants.KEY_ADDRESS, user.address)
     }
 
     fun saveIndustryData(user: Industry){
@@ -24,6 +25,10 @@ class PreferenceManager(context: Context) {
         setEmail(Constants.KEY_EMAIL, user.email)
         setPhone(Constants.KEY_PHONE, user.phone)
         setType(Constants.KEY_TYPE, user.type)
+        setType(Constants.KEY_ADDRESS, user.address)
+        setType(Constants.KEY_PICKUP, user.pickup)
+        setType(Constants.KEY_SUM_TRASH, user.sumTrash)
+        setType(Constants.KEY_DESCRIPTION, user.description)
     }
 
     fun saveDriverData(user: Driver){
@@ -33,6 +38,7 @@ class PreferenceManager(context: Context) {
         setEmail(Constants.KEY_EMAIL, user.email)
         setPhone(Constants.KEY_PHONE, user.phone)
         setType(Constants.KEY_TYPE, user.type)
+        setType(Constants.KEY_ADDRESS, user.address)
     }
 
     fun setUserId(key: String, value: String){

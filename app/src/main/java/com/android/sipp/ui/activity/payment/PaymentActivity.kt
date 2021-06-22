@@ -112,7 +112,8 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
                     preferenceManager.getType(Constants.KEY_TYPE)!!,
                     "active",
                     "not started",
-                    false
+                    false,
+                    preferenceManager.getAddress(Constants.KEY_ADDRESS)!!
                 )
             }
             "Penjemputan Langsung" -> {
@@ -125,7 +126,8 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
                     preferenceManager.getType(Constants.KEY_TYPE)!!,
                     "active",
                     "not started",
-                    false
+                    false,
+                    preferenceManager.getAddress(Constants.KEY_ADDRESS)!!
                 )
             }
         }

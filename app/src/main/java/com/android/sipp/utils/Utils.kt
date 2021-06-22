@@ -26,6 +26,11 @@ object Utils {
         const val FIELD_EMAIL = "email"
         const val FIELD_PHONE = "phone"
         const val FIELD_TYPE = "type"
+        const val FIELD_ADDRESS = "address"
+
+        const val FIELD_PICKUP = "pickup"
+        const val FIELD_SUM_TRASH = "sumTrash"
+        const val FIELD_DESCRIPTION = "description"
         //ORDER
         const val FIELD_PICKUP_TYPE = "pickupType"
         const val FIELD_NAME = "name"

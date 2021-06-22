@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun checkStatusPickup() {
         mainViewModel.checkStatusPickup(
-            preferenceManager.getUserId(Constants.KEY_USER_ID)!!
+            preferenceManager.getEmail(Constants.KEY_EMAIL)!!
         )
         observe()
     }

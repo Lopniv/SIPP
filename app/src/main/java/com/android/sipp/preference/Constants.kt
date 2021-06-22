@@ -7,4 +7,8 @@ object Constants {
     const val KEY_EMAIL = "email"
     const val KEY_PHONE = "phone"
     const val KEY_TYPE = "type"
+    const val KEY_ADDRESS = "address"
+    const val KEY_PICKUP = "pickup"
+    const val KEY_SUM_TRASH = "sumTrash"
+    const val KEY_DESCRIPTION = "description"
 }

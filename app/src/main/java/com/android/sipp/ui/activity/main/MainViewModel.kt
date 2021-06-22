@@ -15,12 +15,12 @@ class MainViewModel : ViewModel() {
     var errorMessage = MutableLiveData<String>()
     var order = MutableLiveData<Order>()
 
-    fun checkStatusPickup(userId: String) {
+    fun checkStatusPickup(email: String) {
         firestore = FirebaseFirestore.getInstance()
         defaultValue()
         loading.value = true
         firestore.collection(COLLECTION_PICKUP)
-            .document(userId)
+            .document(email)
             .get()
             .addOnSuccessListener{ document ->
                 if (document.exists()){
@@ -33,6 +33,7 @@ class MainViewModel : ViewModel() {
                     val email = document.data?.get("email") as String
                     val name = document.data?.get("name") as String
                     val statusPickup = document.data?.get("statusPickup") as String
+                    val address = document.data?.get("address") as String
                     val order = Order(
                         email,
                         name,
@@ -42,7 +43,8 @@ class MainViewModel : ViewModel() {
                         type,
                         status,
                         statusPickup,
-                        statusPayment
+                        statusPayment,
+                        address
                     )
                     Log.e("TAG", "DATA: $order")
 

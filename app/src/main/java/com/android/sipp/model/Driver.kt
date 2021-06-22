@@ -10,5 +10,6 @@ data class Driver(
     var lastName: String = "",
     var email: String = "",
     var phone: String = "",
-    var type: String = ""
+    var type: String = "",
+    var address: String = ""
 ): Parcelable
