@@ -5,16 +5,22 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.sipp.R
 import com.android.sipp.adapter.DriverPickupIndustryAdapter
 import com.android.sipp.adapter.DriverPickupPersonalAdapter
 import com.android.sipp.databinding.ActivityDriverBinding
 import com.android.sipp.model.Order
+import com.android.sipp.preference.PreferenceManager
 import com.android.sipp.ui.activity.driver.DetailDriverPickupActivity.Companion.ORDER_DATA
+import com.android.sipp.ui.activity.intro.IntroActivity
+import com.android.sipp.ui.fragment.LogoutDialogFragment
 import com.android.sipp.utils.Listener
+import com.android.sipp.utils.Utils
 import com.android.sipp.utils.Utils.FirestoreKeys.COLLECTION_PICKUP
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_ADDRESS
 import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_AMOUNT_PICKUP
@@ -29,7 +35,7 @@ import com.android.sipp.utils.Utils.FirestoreKeys.FIELD_TYPE
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class DriverActivity : AppCompatActivity(), Listener {
+class DriverActivity : AppCompatActivity(), Listener, View.OnClickListener {
 
     private var email: ArrayList<String> = arrayListOf()
     private var personalList: ArrayList<Order> = arrayListOf()
@@ -40,17 +46,24 @@ class DriverActivity : AppCompatActivity(), Listener {
     private lateinit var personalAdapter: DriverPickupPersonalAdapter
     private lateinit var industryAdapter: DriverPickupIndustryAdapter
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityDriverBinding.inflate(layoutInflater)
         setContentView(b.root)
+        setListener()
         initiate()
         initRecyclerView()
         getData()
     }
 
+    private fun setListener() {
+        b.btnLogout.setOnClickListener(this)
+    }
+
     private fun initiate() {
+        preferenceManager = PreferenceManager(this)
         personalAdapter = DriverPickupPersonalAdapter(arrayListOf(), this)
         industryAdapter = DriverPickupIndustryAdapter(arrayListOf(), this)
     }
@@ -174,5 +187,12 @@ class DriverActivity : AppCompatActivity(), Listener {
         val detail = Intent(this, DetailDriverPickupActivity::class.java)
         detail.putExtra(ORDER_DATA, order)
         startActivity(detail)
+    }
+
+    override fun onClick(v: View?) {
+        if (v?.id == R.id.btn_logout){
+            val dialog = LogoutDialogFragment()
+            dialog.show(supportFragmentManager, "DIALOG")
+        }
     }
 }
