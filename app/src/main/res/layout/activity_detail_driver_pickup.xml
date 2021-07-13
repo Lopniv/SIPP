@@ -95,7 +95,6 @@
             android:id="@+id/iv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:src="@drawable/ic_location"
             android:layout_below="@id/iv_status_pickup"
             android:layout_margin="10dp"
@@ -105,7 +104,6 @@
             android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:textSize="20sp"
             android:text="@string/ex_address"
             android:textColor="@color/green_1000"
@@ -113,6 +111,73 @@
             android:fontFamily="@font/gill_sans_bold_cond"
             android:layout_below="@id/tv_status_pickup"
             android:layout_toEndOf="@id/iv_profile"/>
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            app:menu_fab_size="normal"
+            app:menu_showShadow="true"
+            app:menu_shadowColor="#66000000"
+            app:menu_shadowRadius="4dp"
+            app:menu_shadowXOffset="1dp"
+            app:menu_shadowYOffset="3dp"
+            app:menu_colorNormal="@color/green_1000"
+            app:menu_colorPressed="@color/green_1000"
+            app:menu_colorRipple="#99FFFFFF"
+            app:menu_animationDelayPerItem="50"
+            app:menu_icon="@drawable/ic_edit"
+            app:menu_buttonSpacing="0dp"
+            app:menu_labels_margin="0dp"
+            app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+            app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+            app:menu_labels_paddingTop="4dp"
+            app:menu_labels_paddingRight="8dp"
+            app:menu_labels_paddingBottom="4dp"
+            app:menu_labels_paddingLeft="8dp"
+            app:menu_labels_padding="8dp"
+            app:menu_labels_textColor="#FFFFFF"
+            app:menu_labels_textSize="14sp"
+            app:menu_labels_cornerRadius="3dp"
+            app:menu_labels_colorNormal="#333333"
+            app:menu_labels_colorPressed="#444444"
+            app:menu_labels_colorRipple="#66FFFFFF"
+            app:menu_labels_showShadow="true"
+            app:menu_labels_singleLine="false"
+            app:menu_labels_ellipsize="none"
+            app:menu_labels_maxLines="-1"
+            app:menu_labels_position="left"
+            app:menu_openDirection="up"
+            app:menu_backgroundColor="@android:color/transparent"
+            app:menu_fab_show_animation="@anim/show_from_bottom"
+            app:menu_fab_hide_animation="@anim/hide_to_bottom">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_edit_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_monetization"
+                app:fab_colorNormal="@color/green_1000"
+                app:fab_colorPressed="@color/green_1000"
+                app:fab_size="mini"
+                app:fab_label="Catat Pembayaran"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shipping"
+                app:fab_colorNormal="@color/green_1000"
+                app:fab_colorPressed="@color/green_1000"
+                app:fab_size="mini"
+                app:fab_label="Pickup"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
 
     </RelativeLayout>
 

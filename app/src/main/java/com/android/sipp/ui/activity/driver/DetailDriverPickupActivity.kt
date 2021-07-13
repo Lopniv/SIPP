@@ -40,5 +40,6 @@ class DetailDriverPickupActivity : AppCompatActivity() {
             b.tvStatusPickup.text = "Sedang dijemput"
         }
         b.tvName.text = order.name
+        b.tvAddress.text = order.address
     }
 }
